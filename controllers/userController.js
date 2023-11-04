@@ -75,3 +75,18 @@ export const verifyToken = (req, res, next) => {
   });
   next();
 };
+
+export const getUser = async (req, res, next) => {
+  const userId = req.id;
+  let user;
+  try {
+    user = await userModel.findById(userId, '-password');
+  } catch (err) {
+    return new Error(err);
+  }
+
+  if (!user) {
+    return res.status(400).json({ message: 'User not found' });
+  }
+  return res.status(200).json({ user });
+};
