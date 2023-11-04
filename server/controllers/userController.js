@@ -52,8 +52,13 @@ export const login = async (req, res, next) => {
   }
 
   const token = jwt.sign({ id: existingUser._id }, process.env.JWT_SECRET_KEY, {
-    expiresIn: '30s',
+    expiresIn: '35s',
   });
+
+  console.log('Generated token', token);
+  if (req.cookies[`${existingUser._id}`]) {
+    req.cookies[`${existingUser._id}`] = '';
+  }
 
   res.cookie(String(existingUser._id), token, {
     path: '/',
@@ -103,4 +108,42 @@ export const getUser = async (req, res, next) => {
     return res.status(400).json({ message: 'User not found' });
   }
   return res.status(200).json({ user });
+};
+
+export const refreshToken = (req, res, next) => {
+  const cookies = req.headers.cookie;
+  if (!cookies) {
+    return res
+      .status(400)
+      .json({ message: 'Invalid cookies, refresh your token' });
+  }
+
+  const prevToken = cookies.split('=')[1];
+  if (!prevToken) {
+    return res.status(400).json({ message: 'No current token found' });
+  }
+
+  jwt.verify(String(prevToken), process.env.JWT_SECRET_KEY, (err, user) => {
+    if (err) {
+      return res.status(403).json({ message: 'Authentication failed' });
+    }
+    res.clearCookie(`${user.id}`);
+    req.cookies[`${user.id}`] = '';
+
+    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET_KEY, {
+      expiresIn: '35s',
+    });
+
+    console.log('Regenerated token', token);
+
+    res.cookie(String(user.id), token, {
+      path: '/',
+      expires: new Date(Date.now() + 1000 * 30),
+      httpOnly: true,
+      sameSite: 'lax',
+    });
+    req.id = user.id;
+
+    next();
+  });
 };
