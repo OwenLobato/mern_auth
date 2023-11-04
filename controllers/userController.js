@@ -52,16 +52,30 @@ export const login = async (req, res, next) => {
   }
 
   const token = jwt.sign({ id: existingUser._id }, process.env.JWT_SECRET_KEY, {
-    expiresIn: '1hr',
+    expiresIn: '30s',
   });
+
+  res.cookie(String(existingUser._id), token, {
+    path: '/',
+    expires: new Date(Date.now() + 1000 * 30),
+    httpOnly: true,
+    sameSite: 'lax',
+  });
+
   return res
     .status(200)
     .json({ message: 'Successfully logged in', user: existingUser, token });
 };
 
 export const verifyToken = (req, res, next) => {
-  const headers = req.headers[`authorization`];
-  const token = headers.split(' ')[1];
+  const cookies = req.headers.cookie;
+  if (!cookies) {
+    return res
+      .status(400)
+      .json({ message: 'Invalid cookies, refresh your token' });
+  }
+  const token = cookies.split('=')[1];
+  console.log(token);
 
   if (!token) {
     return res.status(400).json({ message: 'No token found' });
