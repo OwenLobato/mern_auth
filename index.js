@@ -4,10 +4,12 @@ import { config } from 'dotenv';
 import router from './routes/userRoutes.js';
 
 config();
-const app = express();
-
 const mongoUri = process.env.MONGODB_URI;
 const port = process.env.PORT || 9999;
+
+const app = express();
+app.use(express.json());
+app.use('/api', router);
 
 mongoose
   .connect(mongoUri)
@@ -16,5 +18,3 @@ mongoose
     console.log(`DB is connected and listen on port ${port}`);
   })
   .catch((err) => console.log(err));
-
-app.use('/api', router);
