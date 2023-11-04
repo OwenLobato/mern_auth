@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import mongoose from 'mongoose';
 import { config } from 'dotenv';
 import router from './routes/userRoutes.js';
@@ -9,6 +10,7 @@ const mongoUri = process.env.MONGODB_URI;
 const port = process.env.PORT || 9999;
 
 const app = express();
+app.use(cors());
 app.use(cookieParser());
 app.use(express.json());
 app.use('/api', router);

@@ -1,7 +1,11 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
+import axios from 'axios';
 import { Box, TextField, Button, Typography } from '@mui/material';
 
 export const Signup = () => {
+  const navigate = useNavigate();
+
   const initialInputs = {
     name: '',
     email: '',
@@ -9,9 +13,28 @@ export const Signup = () => {
   };
   const [inputs, setInputs] = useState(initialInputs);
 
+  const sendRequest = async () => {
+    const apiURL = process.env.REACT_APP_API_URL;
+    const port = process.env.REACT_APP_PORT;
+    const apiVersion = process.env.REACT_APP_API_VERSION;
+
+    const res = await axios
+      .post(`${apiURL}:${port}/${apiVersion}/signup`, {
+        name: inputs.name,
+        email: inputs.email,
+        password: inputs.password,
+      })
+      .catch((err) => console.log('[ERROR]', err));
+
+    const data = await res.data;
+    return data;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('INPUTS: ', inputs);
+    sendRequest().then(() => {
+      navigate('/login');
+    });
   };
 
   const handleChangeInput = (e) => {
