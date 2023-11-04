@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Box, AppBar, Toolbar, Typography, Tab, Tabs } from '@mui/material';
 
 export const Header = () => {
@@ -16,8 +17,8 @@ export const Header = () => {
               onChange={(e, val) => setValue(val)}
               value={value}
             >
-              <Tab label='Login' />
-              <Tab label='Signup' />
+              <Tab label='Login' LinkComponent={Link} to='/login' />
+              <Tab label='Signup' LinkComponent={Link} to='/signup' />
             </Tabs>
           </Box>
         </Toolbar>
