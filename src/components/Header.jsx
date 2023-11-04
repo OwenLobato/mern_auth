@@ -6,7 +6,7 @@ export const Header = () => {
 
   return (
     <div>
-      <AppBar>
+      <AppBar position='sticky'>
         <Toolbar>
           <Typography variant='h3'>MERN Auth</Typography>
           <Box sx={{ ml: 'auto' }}>
