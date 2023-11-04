@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
+import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import { Box, TextField, Button, Typography } from '@mui/material';
+import { authActions } from '../store';
 
 export const Login = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const initialInputs = {
@@ -31,9 +34,8 @@ export const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     sendRequest()
-      .then(() => {
-        navigate('/user');
-      })
+      .then(() => dispatch(authActions.login()))
+      .then(() => navigate('/user'))
       .catch((err) => console.log(err));
   };
 
