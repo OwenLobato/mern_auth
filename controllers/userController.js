@@ -1,4 +1,5 @@
 import { userModel } from '../models/User.js';
+import bcrypt from 'bcrypt';
 
 export const signup = async (req, res, next) => {
   const { name, email, password } = req.body;
@@ -16,7 +17,10 @@ export const signup = async (req, res, next) => {
       .json({ message: 'User already exists, login instead' });
   }
 
-  const user = new userModel({ name, email, password });
+  const salt = bcrypt.genSaltSync(Number(process.env.SALT_ROUNDS));
+  const hashedPassword = bcrypt.hashSync(password, salt);
+
+  const user = new userModel({ name, email, password: hashedPassword });
 
   try {
     await user.save();
