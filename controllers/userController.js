@@ -58,3 +58,20 @@ export const login = async (req, res, next) => {
     .status(200)
     .json({ message: 'Successfully logged in', user: existingUser, token });
 };
+
+export const verifyToken = (req, res, next) => {
+  const headers = req.headers[`authorization`];
+  const token = headers.split(' ')[1];
+
+  if (!token) {
+    return res.status(400).json({ message: 'No token found' });
+  }
+  jwt.verify(String(token), process.env.JWT_SECRET_KEY, (err, user) => {
+    if (err) {
+      return res.status(400).json({ message: 'Invalid token' });
+    }
+    console.log(user.id);
+    req.id = user.id;
+  });
+  next();
+};
