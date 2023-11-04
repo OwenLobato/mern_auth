@@ -51,8 +51,12 @@ export const Header = () => {
               onChange={(e, val) => setValue(val)}
               value={value}
             >
-              <Tab label='Login' LinkComponent={Link} to='/login' />
-              <Tab label='Signup' LinkComponent={Link} to='/signup' />
+              {!isLoggedIn && (
+                <>
+                  <Tab label='Login' LinkComponent={Link} to='/login' />
+                  <Tab label='Signup' LinkComponent={Link} to='/signup' />
+                </>
+              )}
               {isLoggedIn && (
                 <Tab
                   label='Logout'
