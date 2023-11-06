@@ -1,7 +1,12 @@
+import express from 'express';
 import { config } from 'dotenv';
+import router from './routes/auth.js';
 
 config();
-const mongoUri = process.env.MONGODB_URI;
 const port = process.env.PORT || 9999;
 
-console.log("HOLA MUNDO");
+const app = express();
+app.use(express.json());
+app.use('/api', router);
+
+app.listen(port, () => console.log(`Server running on port ${port}`));
