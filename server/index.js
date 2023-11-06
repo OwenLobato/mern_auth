@@ -1,6 +1,7 @@
 import express from 'express';
 import { config } from 'dotenv';
 import router from './routes/auth.js';
+import privateRouter from './routes/private.js';
 import { connectDB } from './config/db.js';
 import errorHandler from './middlewares/error.js';
 
@@ -12,6 +13,7 @@ const port = process.env.PORT || 9999;
 const app = express();
 app.use(express.json());
 app.use('/api', router);
+app.use('/api/private', privateRouter);
 app.use(errorHandler); // Should be last of the middlewares
 
 const server = app.listen(port, () =>
