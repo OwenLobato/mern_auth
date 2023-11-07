@@ -6,9 +6,11 @@ import {
   ForgotPassword,
   ResetPassword,
   Private,
+  NotFoundPage,
 } from './components/screens';
 
 const PublicAppRoutes = [
+  { path: '/*', component: <NotFoundPage /> },
   { path: '/login', component: <Login /> },
   { path: '/register', component: <Register /> },
   { path: '/passwordForgot', component: <ForgotPassword /> },
