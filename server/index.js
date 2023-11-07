@@ -3,7 +3,7 @@ import cors from 'cors';
 import { config } from 'dotenv';
 import router from './routes/auth.js';
 import privateRouter from './routes/private.js';
-import { connectDB } from './config/db.js';
+import { connectDB } from './config/mongo.js';
 import errorHandler from './middlewares/error.js';
 
 config();
