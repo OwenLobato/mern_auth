@@ -30,7 +30,6 @@ export const Private = () => {
           }
         );
         setPrivateData(data.data);
-        console.log(`🚀 ~ fetchPrivateDate ~ data:`, data)
       } catch (error) {
         localStorage.removeItem('authToken');
         setError('You are not authorized, please login');
