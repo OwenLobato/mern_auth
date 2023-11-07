@@ -1,24 +1,45 @@
-import { Route, Routes } from 'react-router-dom';
-import './App.css';
-import { Header, Login, Signup, Welcome } from './components';
-import { useSelector } from 'react-redux';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { PrivateRoute } from './components/routing/PrivateRoute';
+import {
+  Login,
+  Register,
+  ForgotPassword,
+  ResetPassword,
+  Private,
+} from './components/screens';
+
+const PublicAppRoutes = [
+  { path: '/login', component: <Login /> },
+  { path: '/register', component: <Register /> },
+  { path: '/passwordForgot', component: <ForgotPassword /> },
+  { path: '/passwordReset/:resetToken', component: <ResetPassword /> },
+];
+const AppRoutes = [{ path: '/', component: <Private /> }];
 
 function App() {
-  const isLoggedIn = useSelector((state) => state.isLoggedIn);
-
   return (
-    <>
-      <header>
-        <Header />
-      </header>
-      <main>
+    <BrowserRouter>
+      <div className='App'>
         <Routes>
-          <Route path='/login' element={<Login />} />
-          <Route path='/signup' element={<Signup />} />
-          {isLoggedIn && <Route path='/user' element={<Welcome />} />}{' '}
+          {/* PUBLIC ROUTES*/}
+          {PublicAppRoutes.map(({ path, component }, index) => (
+            <Route key={index} path={path} element={<>{component}</>} />
+          ))}
+          {/* PRIVATE ROUTES */}
+          {AppRoutes.map(({ path, component }, index) => (
+            <Route
+              key={index}
+              path={path}
+              element={
+                <>
+                  <PrivateRoute>{component}</PrivateRoute>
+                </>
+              }
+            />
+          ))}
         </Routes>
-      </main>
-    </>
+      </div>
+    </BrowserRouter>
   );
 }
 
