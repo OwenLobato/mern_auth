@@ -49,7 +49,7 @@ export const Login = () => {
     <div className='login-screen'>
       <form onSubmit={loginHandler} className='login-screen__form'>
         <h3 className='login-screen__title'>Login</h3>
-        {error && <span className='error-message'>{error}</span>}
+        {error && <span className='message error-message'>{error}</span>}
         <div className='form-group'>
           <label htmlFor='email'>Email:</label>
           <input

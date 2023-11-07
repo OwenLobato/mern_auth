@@ -60,7 +60,7 @@ export const Register = () => {
     <div className='register-screen'>
       <form onSubmit={registerHandler} className='register-screen__form'>
         <h3 className='register-screen__title'>Register</h3>
-        {error && <span className='error-message'>{error}</span>}
+        {error && <span className='message error-message'>{error}</span>}
         <div className='form-group'>
           <label htmlFor='name'>Username:</label>
           <input

@@ -42,8 +42,8 @@ export const ForgotPassword = () => {
         className='forgotpassword-screen__form'
       >
         <h3 className='forgotpassword-screen__title'>Forgot Password</h3>
-        {error && <span className='error-message'>{error}</span>}
-        {success && <span className='success-message'>{success}</span>}
+        {error && <span className='message error-message'>{error}</span>}
+        {success && <span className='message success-message'>{success}</span>}
         <div className='form-group'>
           <p className='forgotpassword-screen__subtext'>
             Please enter the email address you register your account with. We

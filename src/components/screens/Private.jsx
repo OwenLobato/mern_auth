@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import './Private.css';
 
 export const Private = () => {
   const navigate = useNavigate();
@@ -29,6 +30,7 @@ export const Private = () => {
           }
         );
         setPrivateData(data.data);
+        console.log(`🚀 ~ fetchPrivateDate ~ data:`, data)
       } catch (error) {
         localStorage.removeItem('authToken');
         setError('You are not authorized, please login');
@@ -44,14 +46,18 @@ export const Private = () => {
   };
 
   return error ? (
-    <>
-      <span className='error-message'>{error}</span>
-      <button onClick={() => navigate('/login')}>Ingresar</button>
-    </>
+    <div className='private-container'>
+      <span className='message error-message'>{error}</span>
+      <button className='logout-button' onClick={() => navigate('/login')}>
+        Ingresar
+      </button>
+    </div>
   ) : (
-    <>
-      <div style={{ background: 'green', color: 'white' }}>{privateData}</div>
-      <button onClick={logoutHandler}>Logout</button>
-    </>
+    <div className='private-container'>
+      <div className='message success-message'>{privateData}</div>
+      <button className='logout-button' onClick={logoutHandler}>
+        Logout
+      </button>
+    </div>
   );
 };

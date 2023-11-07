@@ -57,9 +57,9 @@ export const ResetPassword = () => {
         className='resetpassword-screen__form'
       >
         <h3 className='resetpassword-screen__title'>Reset Password</h3>
-        {error && <span className='error-message'>{error} </span>}
+        {error && <span className='message error-message'>{error} </span>}
         {success && (
-          <span className='success-message'>
+          <span className='message success-message'>
             {success} <Link to='/login'>Login</Link>
           </span>
         )}
