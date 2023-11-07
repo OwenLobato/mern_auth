@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import { config } from 'dotenv';
 import router from './routes/auth.js';
 import privateRouter from './routes/private.js';
@@ -11,6 +12,7 @@ connectDB();
 const port = process.env.PORT || 9999;
 
 const app = express();
+app.use(cors({ credentials: true, origin: process.env.ORIGIN }));
 app.use(express.json());
 app.use('/api', router);
 app.use('/api/private', privateRouter);
