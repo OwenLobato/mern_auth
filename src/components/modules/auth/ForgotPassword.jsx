@@ -1,8 +1,10 @@
 import { useState } from 'react';
-import axios from 'axios';
+import useAuth from '../../../hooks/useAuth';
 import './ForgotPassword.css';
 
 export const ForgotPassword = () => {
+  const { forgotPassword } = useAuth();
+
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
@@ -10,29 +12,17 @@ export const ForgotPassword = () => {
   const forgotPasswordHandler = async (e) => {
     e.preventDefault();
 
-    try {
-      const apiURL = process.env.REACT_APP_API_URL;
-      const port = process.env.REACT_APP_PORT;
-      const authVersion = process.env.REACT_APP_AUTH_VERSION;
-
-      const { data } = await axios.post(
-        `${apiURL}:${port}${authVersion}/forgotPassword`,
-        { email },
-        {
-          header: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-
-      setSuccess(data.message);
-    } catch (err) {
-      setError(err.response.data.message);
-      setEmail('');
-      setTimeout(() => {
-        setError('');
-      }, 5000);
-    }
+    forgotPassword(email)
+      .then(({ data }) => {
+        setSuccess(data.message);
+      })
+      .catch((err) => {
+        setError(err.response.data.message);
+        setEmail('');
+        setTimeout(() => {
+          setError('');
+        }, 5000);
+      });
   };
 
   return (

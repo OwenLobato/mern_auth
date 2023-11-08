@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
+import useAuth from '../../../hooks/useAuth';
 import './Register.css';
 
 export const Register = () => {
   const navigate = useNavigate();
+  const { register } = useAuth();
 
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -24,35 +25,19 @@ export const Register = () => {
       return setError('Passwords do not match');
     }
 
-    try {
-      const apiURL = process.env.REACT_APP_API_URL;
-      const port = process.env.REACT_APP_PORT;
-      const authVersion = process.env.REACT_APP_AUTH_VERSION;
-
-      const { data } = await axios.post(
-        `${apiURL}:${port}${authVersion}/register`,
-        {
-          username,
-          email,
-          password,
-        },
-        {
-          header: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-
-      localStorage.setItem('authToken', data.data.token);
-      navigate('/');
-    } catch (err) {
-      setError(
-        err?.response?.data?.message || 'Error on server, try again later'
-      );
-      setTimeout(() => {
-        setError('');
-      }, 5000);
-    }
+    register(username, email, password)
+      .then(({ data }) => {
+        localStorage.setItem('authToken', data.data.token);
+        navigate('/');
+      })
+      .catch((err) => {
+        setError(
+          err?.response?.data?.message || 'Error on server, try again later'
+        );
+        setTimeout(() => {
+          setError('');
+        }, 5000);
+      });
   };
 
   return (
