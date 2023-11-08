@@ -27,10 +27,10 @@ export const Register = () => {
     try {
       const apiURL = process.env.REACT_APP_API_URL;
       const port = process.env.REACT_APP_PORT;
-      const apiVersion = process.env.REACT_APP_API_VERSION;
+      const authVersion = process.env.REACT_APP_AUTH_VERSION;
 
       const { data } = await axios.post(
-        `${apiURL}:${port}/${apiVersion}/register`,
+        `${apiURL}:${port}${authVersion}/register`,
         {
           username,
           email,
@@ -43,12 +43,11 @@ export const Register = () => {
         }
       );
 
-      localStorage.setItem('authToken', data.token);
-
+      localStorage.setItem('authToken', data.data.token);
       navigate('/');
     } catch (err) {
       setError(
-        err?.response?.data?.error || 'Error on server, try again later'
+        err?.response?.data?.message || 'Error on server, try again later'
       );
       setTimeout(() => {
         setError('');

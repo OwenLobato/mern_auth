@@ -22,10 +22,10 @@ export const Login = () => {
     try {
       const apiURL = process.env.REACT_APP_API_URL;
       const port = process.env.REACT_APP_PORT;
-      const apiVersion = process.env.REACT_APP_API_VERSION;
+      const authVersion = process.env.REACT_APP_AUTH_VERSION;
 
       const { data } = await axios.post(
-        `${apiURL}:${port}/${apiVersion}/login`,
+        `${apiURL}:${port}${authVersion}/login`,
         { email, password },
         {
           header: {
@@ -34,11 +34,10 @@ export const Login = () => {
         }
       );
 
-      localStorage.setItem('authToken', data.token);
-
+      localStorage.setItem('authToken', data.data.token);
       navigate('/');
-    } catch (error) {
-      setError(error.response.data.error);
+    } catch (err) {
+      setError(err.response.data.message);
       setTimeout(() => {
         setError('');
       }, 5000);

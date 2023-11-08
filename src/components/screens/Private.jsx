@@ -21,7 +21,7 @@ export const Private = () => {
         const apiVersion = process.env.REACT_APP_API_VERSION;
 
         const { data } = await axios.get(
-          `${apiURL}:${port}/${apiVersion}/private`,
+          `${apiURL}:${port}${apiVersion}/users`,
           {
             headers: {
               'Content-Type': 'application/json',
@@ -29,10 +29,13 @@ export const Private = () => {
             },
           }
         );
-        setPrivateData(data.data);
-      } catch (error) {
+        console.log(`🚀 DATA:`, data);
+        setPrivateData(data.message);
+      } catch (err) {
         localStorage.removeItem('authToken');
-        setError('You are not authorized, please login');
+        setError(
+          err.response.data.message || 'You are not authorized, please login'
+        );
       }
     };
 
