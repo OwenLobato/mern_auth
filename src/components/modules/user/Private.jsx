@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import useUsers from '../../../hooks/useUsers';
 import './Private.css';
 
 export const Private = () => {
   const navigate = useNavigate();
+  const { getUsers } = useUsers({
+    Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+  });
 
   const [error, setError] = useState('');
   const [privateData, setPrivateData] = useState('');
@@ -14,32 +17,16 @@ export const Private = () => {
       navigate('/login');
     }
 
-    const fetchPrivateDate = async () => {
-      try {
-        const apiURL = process.env.REACT_APP_API_URL;
-        const port = process.env.REACT_APP_PORT;
-        const apiVersion = process.env.REACT_APP_API_VERSION;
-
-        const { data } = await axios.get(
-          `${apiURL}:${port}${apiVersion}/users`,
-          {
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${localStorage.getItem('authToken')}`,
-            },
-          }
-        );
-        console.log(`🚀 DATA:`, data);
+    getUsers()
+      .then(({ data }) => {
         setPrivateData(data.message);
-      } catch (err) {
+      })
+      .catch((err) => {
         localStorage.removeItem('authToken');
         setError(
           err.response.data.message || 'You are not authorized, please login'
         );
-      }
-    };
-
-    fetchPrivateDate();
+      });
   }, []);
 
   const logoutHandler = () => {
