@@ -4,8 +4,8 @@ import {
   ForgotPassword,
   ResetPassword,
   Private,
-  NotFoundPage,
-} from './components/screens';
+} from './components/modules';
+import { NotFoundPage } from './components/globals';
 
 export const PublicAppRoutes = [
   { path: '/*', component: <NotFoundPage /> },
