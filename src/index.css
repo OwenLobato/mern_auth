@@ -52,22 +52,20 @@ body {
   color: #fff;
 }
 
-.error-message {
+.message {
   width: 100%;
   display: inline-block;
-  padding: 5px;
-  background: red;
+  padding: 10px;
   color: #fff;
   text-align: center;
-  margin: 0.5rem 0;
+  margin: 10px 0;
+  border-radius: 5px;
+}
+
+.error-message {
+  background: red;
 }
 
 .success-message {
-  width: 100%;
-  display: inline-block;
-  padding: 5px;
-  background: green;
-  color: #fff;
-  text-align: center;
-  margin: 0.5rem 0;
+  background: #4BB543;
 }

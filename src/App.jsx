@@ -1,20 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { PrivateRoute } from './components/routing/PrivateRoute';
-import {
-  Login,
-  Register,
-  ForgotPassword,
-  ResetPassword,
-  Private,
-} from './components/screens';
-
-const PublicAppRoutes = [
-  { path: '/login', component: <Login /> },
-  { path: '/register', component: <Register /> },
-  { path: '/passwordForgot', component: <ForgotPassword /> },
-  { path: '/passwordReset/:resetToken', component: <ResetPassword /> },
-];
-const AppRoutes = [{ path: '/', component: <Private /> }];
+import { PrivateRoute } from './components/globals';
+import { PublicAppRoutes, AppRoutes } from './routes';
 
 function App() {
   return (

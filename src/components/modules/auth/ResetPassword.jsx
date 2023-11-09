@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import axios from 'axios';
-
+import useAuth from '../../../hooks/useAuth';
 import './ResetPassword.css';
 
 export const ResetPassword = () => {
+  const { resetPassword } = useAuth();
   const { resetToken } = useParams();
 
   const [password, setPassword] = useState('');
@@ -24,30 +24,16 @@ export const ResetPassword = () => {
       return setError("Passwords don't match");
     }
 
-    try {
-      const apiURL = process.env.REACT_APP_API_URL;
-      const port = process.env.REACT_APP_PORT;
-      const apiVersion = process.env.REACT_APP_API_VERSION;
-
-      const { data } = await axios.put(
-        `${apiURL}:${port}/${apiVersion}/resetPassword/${resetToken}`,
-        {
-          password,
-        },
-        {
-          header: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-
-      setSuccess(data.data);
-    } catch (err) {
-      setError(err.response.data.error);
-      setTimeout(() => {
-        setError('');
-      }, 5000);
-    }
+    resetPassword(password, resetToken)
+      .then(({ data }) => {
+        setSuccess(data.message);
+      })
+      .catch((err) => {
+        setError(err.response.data.message);
+        setTimeout(() => {
+          setError('');
+        }, 5000);
+      });
   };
 
   return (
@@ -57,9 +43,9 @@ export const ResetPassword = () => {
         className='resetpassword-screen__form'
       >
         <h3 className='resetpassword-screen__title'>Reset Password</h3>
-        {error && <span className='error-message'>{error} </span>}
+        {error && <span className='message error-message'>{error} </span>}
         {success && (
-          <span className='success-message'>
+          <span className='message success-message'>
             {success} <Link to='/login'>Login</Link>
           </span>
         )}

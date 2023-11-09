@@ -1,8 +1,9 @@
 import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
-import ErrorResponse from '../utils/errorResponse.js';
+import { customError } from '../network/response.js';
+import { error } from '../network/response.js';
 
-export const protect = async (req, res, next) => {
+export const isAuthenticated = async (req, res, next) => {
   let token;
   if (
     req.headers.authorization &&
@@ -11,19 +12,38 @@ export const protect = async (req, res, next) => {
     token = req.headers.authorization.split(' ')[1];
   }
   if (!token) {
-    return next(new ErrorResponse('Not authorized to access this route', 401));
+    error(
+      req,
+      res,
+      401,
+      'Not authorized to access this route',
+      new Error('User without token')
+    );
   }
 
   try {
     const decoded = jwt.verify(String(token), process.env.JWT_SECRET_KEY);
     const user = await User.findById(decoded.id);
     if (!user) {
-      return next(new ErrorResponse('No user found with this id', 404));
+      error(
+        req,
+        res,
+        404,
+        'No user found with this id',
+        new Error('User with token does not exist')
+      );
+    } else {
+      req.user = user;
+      next();
     }
-
-    req.user = user;
-    next();
   } catch (err) {
-    return next(new ErrorResponse('Not authorized to access this route', 401));
+    error(
+      req,
+      res,
+      401,
+      'Not authorized',
+      new Error('Error on "isAuthenticated" middleware')
+    );
+    return next(customError(401, 'Not authorized'));
   }
 };
