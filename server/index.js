@@ -7,10 +7,15 @@ import { authRoutes, userRoutes } from './network/routes.js';
 config();
 connectDB();
 
+export const ORIGIN_PATH =
+  process.env.NODE_ENV === 'production'
+    ? process.env.PRODUCTION_ORIGIN
+    : process.env.ORIGIN;
+
 const port = process.env.PORT || 9999;
 
 const app = express();
-app.use(cors({ credentials: true, origin: process.env.ORIGIN }));
+app.use(cors({ credentials: true, origin: ORIGIN_PATH }));
 app.use(express.json());
 
 // ROUTES

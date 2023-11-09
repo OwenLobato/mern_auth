@@ -30,7 +30,9 @@ Both the client and server utilize `.env` files to manage environment variables.
 ### Server .env
 
 ```bash
+NODE_ENV=
 ORIGIN=
+PRODUCTION_ORIGIN=
 API_VERSION=
 MONGODB_URI=
 PORT=
@@ -46,6 +48,8 @@ EMAIL_FROM=
 ### Client .env
 
 ```bash
+REACT_APP_NODE_ENV=
+REACT_APP_API_URL_PRODUCTION=
 REACT_APP_API_URL=
 REACT_APP_PORT=
 REACT_APP_API_VERSION=
