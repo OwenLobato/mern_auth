@@ -1,70 +1,87 @@
-# Getting Started with Create React App
+# MERN Authentication and User Management Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a web application developed using the MERN stack (MongoDB, Express, React, and Node.js) that provides authentication features, protected routes, user registration, password reset via email, and uses JSON Web Tokens (JWT) for authentication.
 
-## Available Scripts
+## Project Structure
 
-In the project directory, you can run:
+### Server
 
-### `npm start`
+- **Components**: This section handles entities in the system, with a structure that includes Network (endpoint and response), Controller (application logic), and Store (database logic).
+- **Config**: Configuration files for the server are stored in this section.
+- **Middlewares**: Middleware functions are included for verifying user authentication.
+- **Models**: Database models and schemas are defined using Mongoose in this section.
+- **Network**: This part is responsible for managing server routes and responses.
+- **Utils**: It houses useful functions, such as customizing the Error class and handling email sending.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Client
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **App.jsx**: It configures public and private routes using React Router.
+- **Components**: Application components are organized here, with global components being more generic and module-specific components categorized by section, such as Users, Authorization, and more.
+- **Hooks**: Custom hooks are provided, including the use of the `utils/requests.js` function, an abstract component for making Axios requests, and custom hooks like `useAuth` that simplify and generalize requests.
 
-### `npm test`
+## Security
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The project implements robust security measures, including JWT-based authentication, middleware for private routes, user registration, and password reset via email (utilizing **[SendGrid](https://app.sendgrid.com/)** for email services).
 
-### `npm run build`
+## Environment Variables
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Both the client and server utilize `.env` files to manage environment variables. This approach streamlines configuration for various environments.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Server .env
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+ORIGIN=
+API_VERSION=
+MONGODB_URI=
+PORT=
+SALT_ROUNDS=
+JWT_SECRET_KEY=
+JWT_EXPIRE_TIME=
+EMAIL_SERVICE=
+EMAIL_USERNAME=
+EMAIL_PASSWORD=
+EMAIL_FROM=
+```
 
-### `npm run eject`
+### Client .env
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```bash
+REACT_APP_API_URL=
+REACT_APP_PORT=
+REACT_APP_API_VERSION=
+REACT_APP_AUTH_VERSION=
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## How to run the project
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Running the Server
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+From the root directory of the project, you can launch the server with the following command:
 
-## Learn More
+```bash
+npm run start-server
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+This command takes you to the "server" directory, installs dependencies if not already done, and starts the server using "nodemon."
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Running the Client
 
-### Code Splitting
+To run the client, navigate to the project's root directory and execute the following command:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```bash
+npm run start-client
+```
 
-### Analyzing the Bundle Size
+This command installs client dependencies if not already installed and launches the React application using "react-scripts."
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Ensure that both the server and client are operational to use the application effectively.
 
-### Making a Progressive Web App
+# Screen Examples
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- **Login**: [Screenshot of the login form]
+- **Register**: [Screenshot of the registration form]
+- **Forgot Password**: [Screenshot of the form for sending forgotten password emails]
+- **Reset Password**: [Screenshot of the form for changing the password]
+- **Page Not Found**: [Screenshot of the notice indicating that the selected route doesn't exist]
+- **Users (Authorized)**: [Screenshot of the user component when authorized]
+- **Users (Unauthorized)**: [Screenshot of the user component when unauthorized]
