@@ -78,10 +78,17 @@ Ensure that both the server and client are operational to use the application ef
 
 # Screen Examples
 
-- **Login**: [Screenshot of the login form]
-- **Register**: [Screenshot of the registration form]
-- **Forgot Password**: [Screenshot of the form for sending forgotten password emails]
-- **Reset Password**: [Screenshot of the form for changing the password]
-- **Page Not Found**: [Screenshot of the notice indicating that the selected route doesn't exist]
-- **Users (Authorized)**: [Screenshot of the user component when authorized]
-- **Users (Unauthorized)**: [Screenshot of the user component when unauthorized]
+- **Login**: [Screenshot of the login form]![Login](https://github.com/OwenLobato/mern_auth/assets/74989360/e6c2adaf-487e-40d8-9a30-a2c3d124051c)
+
+- **Register**: [Screenshot of the registration form]![Register](https://github.com/OwenLobato/mern_auth/assets/74989360/f875f0bc-6f7a-4b29-837e-be701f7bb69b)
+
+- **Forgot Password**: [Screenshot of the form for sending forgotten password emails]![PasswordForgot](https://github.com/OwenLobato/mern_auth/assets/74989360/b2b7ac24-bc1c-435a-a60b-88cea99f2814)
+
+- **Reset Password**: [Screenshot of the form for changing the password]![PasswordReset](https://github.com/OwenLobato/mern_auth/assets/74989360/a44015d5-6ddd-4b95-8efe-1f2ba71c14a1)
+
+- **Page Not Found**: [Screenshot of the notice indicating that the selected route doesn't exist]![PageNotFound](https://github.com/OwenLobato/mern_auth/assets/74989360/f7ba513b-39ba-4a93-8661-e1328c84bcfc)
+
+- **Users (Authorized)**: [Screenshot of the user component when authorized]![PrivateSuccess](https://github.com/OwenLobato/mern_auth/assets/74989360/3706e0d3-fb0d-4b1c-b3c3-74162b13a4fe)
+
+- **Users (Unauthorized)**: [Screenshot of the user component when unauthorized]![PrivateError](https://github.com/OwenLobato/mern_auth/assets/74989360/e63991c4-4c5a-4eef-b090-254a1f63f78a)
+
