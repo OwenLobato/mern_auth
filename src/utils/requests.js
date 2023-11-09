@@ -6,11 +6,17 @@ export const request = async function (
   headers,
   { data = {}, api = true } = {}
 ) {
+  let url;
   const apiVersion = process.env.REACT_APP_API_VERSION;
-  const apiUrl = process.env.REACT_APP_API_URL;
-  const port = process.env.REACT_APP_PORT;
 
-  let url = `${apiUrl}:${port}`;
+  if (process.env.REACT_APP_NODE_ENV === 'production') {
+    url = process.env.REACT_APP_API_URL_PRODUCTION;
+  } else {
+    const apiUrl = process.env.REACT_APP_API_URL;
+    const port = process.env.REACT_APP_PORT;
+    url = `${apiUrl}:${port}`;
+  }
+
   if (api) url += apiVersion;
 
   return await axios({
