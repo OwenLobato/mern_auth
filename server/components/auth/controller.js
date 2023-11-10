@@ -60,7 +60,7 @@ export const forgotPassword = (email) => {
 
       await user.save();
 
-      const resetUrl = `${ORIGIN_PATH}/passwordReset/${resetToken}`;
+      const resetUrl = `${ORIGIN_PATH}/#/passwordReset/${resetToken}`;
       const message = `
         <h1 style="font-size: 24px; color: #333; text-align: center;">You have requested a password reset</h1>
         <p style="font-size: 16px; color: #555; text-align: center;">Please go to this link to reset your password</p>
