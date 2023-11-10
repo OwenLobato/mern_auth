@@ -1,7 +1,6 @@
 import { config } from 'dotenv';
 import { isAuthenticated } from '../middlewares/auth.js';
-import authRouter from '../components/auth/network.js';
-import userRouter from '../components/user/network.js';
+import { authRouter, userRouter } from '../components/index.js';
 
 config();
 

@@ -7,7 +7,7 @@ import {
 } from './controller.js';
 import { success, error } from '../../network/response.js';
 
-const authRouter = express.Router();
+export const authRouter = express.Router();
 
 authRouter.post('/register', (req, res) => {
   const { username, email, password } = req.body;
@@ -62,5 +62,3 @@ authRouter.put('/resetPassword/:resetToken', (req, res) => {
       return error(req, res, 500, 'Error resetting password', err);
     });
 });
-
-export default authRouter;

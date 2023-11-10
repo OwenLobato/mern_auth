@@ -2,7 +2,7 @@ import express from 'express';
 import { getPrivateData } from './controller.js';
 import { success, error } from '../../network/response.js';
 
-const userRouter = express.Router();
+export const userRouter = express.Router();
 
 userRouter.get('/', (req, res) => {
   getPrivateData()
@@ -21,5 +21,3 @@ userRouter.get('/', (req, res) => {
       return error(req, res, 500, 'Error getting user data', err);
     });
 });
-
-export default userRouter;
