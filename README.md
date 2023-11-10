@@ -80,26 +80,37 @@ This command installs client dependencies if not already installed and launches 
 
 Ensure that both the server and client are operational to use the application effectively.
 
-# Screen Examples
+## Production Deployment
 
-- **Login**: [Screenshot of the login form].
-![Login](https://github.com/OwenLobato/mern_auth/assets/74989360/e6c2adaf-487e-40d8-9a30-a2c3d124051c)
+The project is currently deployed on [Render.com](https://dashboard.render.com/) for both the front end (client) and back end (server).
 
-- **Register**: [Screenshot of the registration form].
-![Register](https://github.com/OwenLobato/mern_auth/assets/74989360/f875f0bc-6f7a-4b29-837e-be701f7bb69b)
+### Front End (Client)
 
-- **Forgot Password**: [Screenshot of the form for sending forgotten password emails].
-![PasswordForgot](https://github.com/OwenLobato/mern_auth/assets/74989360/b2b7ac24-bc1c-435a-a60b-88cea99f2814)
+The deployed front end is accessible at: [https://mern-auth-itlf.onrender.com](https://mern-auth-itlf.onrender.com)
 
-- **Reset Password**: [Screenshot of the form for changing the password].
-![PasswordReset](https://github.com/OwenLobato/mern_auth/assets/74989360/a44015d5-6ddd-4b95-8efe-1f2ba71c14a1)
+### Back End (Server)
 
-- **Page Not Found**: [Screenshot of the notice indicating that the selected route doesn't exist].
-![PageNotFound](https://github.com/OwenLobato/mern_auth/assets/74989360/f7ba513b-39ba-4a93-8661-e1328c84bcfc)
+The deployed back end is accessible at: [https://mern-auth-api-oaiy.onrender.com](https://mern-auth-api-oaiy.onrender.com)
 
-- **Users (Authorized)**: [Screenshot of the user component when authorized].
-![PrivateSuccess](https://github.com/OwenLobato/mern_auth/assets/74989360/3706e0d3-fb0d-4b1c-b3c3-74162b13a4fe)
+## Screen Examples
 
-- **Users (Unauthorized)**: [Screenshot of the user component when unauthorized].
-![PrivateError](https://github.com/OwenLobato/mern_auth/assets/74989360/e63991c4-4c5a-4eef-b090-254a1f63f78a)
+- **Login**: [Screenshot of the login form].  
+  ![Login](https://github.com/OwenLobato/mern_auth/assets/74989360/e6c2adaf-487e-40d8-9a30-a2c3d124051c)
 
+- **Register**: [Screenshot of the registration form].  
+  ![Register](https://github.com/OwenLobato/mern_auth/assets/74989360/f875f0bc-6f7a-4b29-837e-be701f7bb69b)
+
+- **Forgot Password**: [Screenshot of the form for sending forgotten password emails].  
+  ![PasswordForgot](https://github.com/OwenLobato/mern_auth/assets/74989360/b2b7ac24-bc1c-435a-a60b-88cea99f2814)
+
+- **Reset Password**: [Screenshot of the form for changing the password].  
+  ![PasswordReset](https://github.com/OwenLobato/mern_auth/assets/74989360/a44015d5-6ddd-4b95-8efe-1f2ba71c14a1)
+
+- **Page Not Found**: [Screenshot of the notice indicating that the selected route doesn't exist].  
+  ![PageNotFound](https://github.com/OwenLobato/mern_auth/assets/74989360/f7ba513b-39ba-4a93-8661-e1328c84bcfc)
+
+- **Users (Authorized)**: [Screenshot of the user component when authorized].  
+  ![PrivateSuccess](https://github.com/OwenLobato/mern_auth/assets/74989360/3706e0d3-fb0d-4b1c-b3c3-74162b13a4fe)
+
+- **Users (Unauthorized)**: [Screenshot of the user component when unauthorized].  
+  ![PrivateError](https://github.com/OwenLobato/mern_auth/assets/74989360/e63991c4-4c5a-4eef-b090-254a1f63f78a)
