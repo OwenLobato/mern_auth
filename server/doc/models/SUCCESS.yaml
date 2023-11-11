@@ -1,0 +1,18 @@
+definitions:
+  SUCCESS:
+    type: object
+    properties:
+      success:
+        type: boolean
+        description: Indicates whether the request was successful.
+        example: true
+      error:
+        type: boolean
+        description: Indicates whether the request was not successful.
+        example: false
+      message:
+        type: string
+        description: A message describing the result of the request.
+      data:
+        type: any
+        description: Data associated with the success (optional).

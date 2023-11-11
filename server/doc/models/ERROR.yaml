@@ -1,0 +1,16 @@
+definitions:
+  ERROR:
+    type: object
+    properties:
+      success:
+        type: boolean
+        description: Indicates whether the request was successful.
+        example: false
+      error:
+        type: string
+        description: The error code, message or identifier.
+        example: 'OPERATION.FAILED'
+      message:
+        type: string
+        description: A message describing the error.
+        example: 'Internal server error'
