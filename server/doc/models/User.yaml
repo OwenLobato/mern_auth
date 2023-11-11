@@ -1,0 +1,36 @@
+definitions:
+  User:
+    type: object
+    properties:
+      _id:
+        type: string
+        description: 'The unique identifier for the user'
+        example: '60c123456789012345678901'
+      username:
+        type: string
+        description: 'The username of the user'
+        example: 'john doe'
+      email:
+        type: string
+        format: email
+        description: 'The email address of the user'
+        example: 'john@example.com'
+      password:
+        type: string
+        format: password
+        description: 'The password of the user'
+        example: 'securePassword123'
+        minLength: 6
+      resetPasswordToken:
+        type: string
+        description: 'Token for resetting the user password'
+        example: 'a1b2c3d4e5f6'
+      resetPasswordExpire:
+        type: string
+        format: date-time
+        description: 'Expiration date and time for the reset password token'
+        example: '2023-12-01T12:00:00Z'
+    required:
+      - username
+      - email
+      - password
