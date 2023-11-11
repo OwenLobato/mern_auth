@@ -33,6 +33,7 @@ Both the client and server utilize `.env` files to manage environment variables.
 NODE_ENV=
 ORIGIN=
 PRODUCTION_ORIGIN=
+URL_PRODUCTION=
 API_VERSION=
 MONGODB_URI=
 PORT=
@@ -79,6 +80,10 @@ npm run start-client
 This command installs client dependencies if not already installed and launches the React application using "react-scripts."
 
 Ensure that both the server and client are operational to use the application effectively.
+
+## Swagger Documentation
+
+The project includes Swagger documentation for API endpoints. You can access the graphical documentation interface locally during development at [http://localhost:5000/api/v1/doc](http://localhost:5000/api/v1/doc). For the production environment, the Swagger documentation is available at [https://mern-auth-api-oaiy.onrender.com/api/v1/doc](https://mern-auth-api-oaiy.onrender.com/api/v1/doc). Additionally, the JSON format of the documentation is accessible both locally and in production at [http://localhost:5000/api/v1/doc.json](http://localhost:5000/api/v1/doc.json) and [https://mern-auth-api-oaiy.onrender.com/api/v1/doc.json](https://mern-auth-api-oaiy.onrender.com/api/v1/doc.json), respectively. This documentation provides comprehensive insights into the available API endpoints and their functionalities.
 
 ## Production Deployment
 

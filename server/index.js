@@ -5,6 +5,7 @@ import { dirname, resolve } from 'path';
 import { config } from 'dotenv';
 import { connectDB } from './config/mongo.js';
 import { authRoutes, userRoutes } from './network/routes.js';
+import { swaggerDocs } from './config/doc.js';
 
 config();
 connectDB();
@@ -31,6 +32,9 @@ app.get(/^\/(?!api).*/, (req, res) => {
 // ROUTES
 authRoutes(app);
 userRoutes(app);
+
+// DOCUMENTATION
+swaggerDocs(app);
 
 const server = app.listen(port, () =>
   console.log(`Server running on port ${port}`)
