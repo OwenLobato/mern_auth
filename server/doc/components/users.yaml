@@ -1,0 +1,34 @@
+tags:
+  - name: users
+    description: Endpoints related to user management
+
+paths:
+  /:
+    get:
+      summary: Get all users
+      description: Retrieve a list of all users from the database.
+      tags:
+        - users
+      security:
+        - Bearer: []
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/SUCCESS'
+          examples:
+            application/json:
+              success: true
+              error: false
+              message: 'All users show successfully'
+              data:
+                - $ref: '#/definitions/User'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ERROR'
+          examples:
+            application/json:
+              success: false
+              error: OPERATION.FAILED
+              message: 'Not authorized to access this route'

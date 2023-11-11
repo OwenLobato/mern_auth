@@ -1,0 +1,228 @@
+tags:
+  - name: auth
+    description: Endpoints related to authentication
+
+paths:
+  /register:
+    post:
+      summary: Register a new user
+      description: Register a new user with a unique email.
+      tags:
+        - auth
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              username:
+                type: string
+                description: The username of the user.
+                example: john_doe
+              email:
+                type: string
+                format: email
+                description: The email address of the user.
+                example: john@example.com
+              password:
+                type: string
+                description: The password for the user.
+                example: securePassword123
+      responses:
+        '201':
+          description: User created successfully
+          schema:
+            $ref: '#/definitions/SUCCESS'
+          examples:
+            application/json:
+              success: true
+              error: false
+              message: 'User created successfully'
+              data:
+                user:
+                  $ref: '#/definitions/User'
+                token: 'JWT token'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ERROR'
+          examples:
+            application/json:
+              success: false
+              error: OPERATION.FAILED
+              message: 'Please provide the complete data'
+        '500':
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/ERROR'
+          examples:
+            application/json:
+              success: false
+              error: OPERATION.FAILED
+              message: 'Error registering user'
+
+  /login:
+    post:
+      summary: User login
+      description: Log in with a registered email and password.
+      tags:
+        - auth
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+                format: email
+                description: The email address of the user.
+                example: john@example.com
+              password:
+                type: string
+                description: The password for the user.
+                example: securePassword123
+      responses:
+        '200':
+          description: User login successful
+          schema:
+            $ref: '#/definitions/SUCCESS'
+          examples:
+            application/json:
+              value:
+                success: true
+                error: false
+                message: 'User login successful'
+                data:
+                  user:
+                    $ref: '#/definitions/User'
+                  token: 'JWT token'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/ERROR'
+          examples:
+            application/json:
+              success: false
+              error: OPERATION.FAILED
+              message: 'Please provide email and password'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ERROR'
+          examples:
+            application/json:
+              success: false
+              error: OPERATION.FAILED
+              message: 'Invalid credentials'
+        '500':
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/ERROR'
+          examples:
+            application/json:
+              success: false
+              error: OPERATION.FAILED
+              message: 'Error signing in'
+
+  /forgotPassword:
+    post:
+      summary: Request password reset
+      description: Send a password reset email to the provided email address.
+      tags:
+        - auth
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+                format: email
+                description: The email address to send the password reset request.
+                example: john@example.com
+      responses:
+        '200':
+          description: Password request sent to email successfully
+          schema:
+            $ref: '#/definitions/SUCCESS'
+          examples:
+            application/json:
+              success: true
+              error: false
+              message: 'Password request sent to email successfully'
+              data: null
+        '404':
+          description: Email not found
+          schema:
+            $ref: '#/definitions/ERROR'
+          examples:
+            application/json:
+              success: false
+              error: OPERATION.FAILED
+              message: 'Email could not be sent'
+        '500':
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/ERROR'
+          examples:
+            application/json:
+              success: false
+              error: OPERATION.FAILED
+              message: 'Error sending email'
+
+  /resetPassword/{resetToken}:
+    put:
+      summary: Reset user password
+      description: Reset the user password using a valid reset token.
+      tags:
+        - auth
+      parameters:
+        - name: resetToken
+          in: path
+          required: true
+          type: string
+          description: The reset token received via email.
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              password:
+                type: string
+                description: The new password for the user.
+                example: newSecurePassword123
+      responses:
+        '201':
+          description: Password reset successfully
+          schema:
+            $ref: '#/definitions/SUCCESS'
+          examples:
+            application/json:
+              success: true
+              error: false
+              message: 'Password reset successfully'
+              data: null
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ERROR'
+          examples:
+            application/json:
+              success: false
+              error: OPERATION.FAILED
+              message: 'Invalid reset token'
+        '500':
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/ERROR'
+          examples:
+            application/json:
+              success: false
+              error: OPERATION.FAILED
+              message: 'Error resetting password'
